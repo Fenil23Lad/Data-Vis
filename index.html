@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+
+    <!-- Load d3.js -->
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <link rel="stylesheet" type="text/css" href="main.css">
+</head>
+
+<body>
+ <h1 style="margin-left: 1000px;">World Literacy</h1>
+    <div class="header">
+       
+        <div class="header-right">
+           
+            <a class="active" href="index.html">Bar Graph</a>
+            <a href="page1.html">Scatter Plot</a>
+            <a href="page2.html">Pie Chart</a>
+        </div>
+    </div>
+
+    <div style="padding-left:150px">
+        <div id="svg"></div>
+        <button onclick="update('Value')">Adult</button>
+        <button onclick="update('Value2')">Youth</button>
+        <script>
+                                
+            // set the dimensions and edges of the graph
+            var edge = {
+                    top: 50,
+                    right: 30,
+                    bottom: 70,
+                    left: 60
+                },
+                width = 1500 - edge.left - edge.right,
+                height = 600 - edge.top - edge.bottom;
+
+            // append the svg object to the body of the page
+            var svg = d3.select("#svg")
+                .append("svg")
+                .attr("width", width + edge.left + edge.right)
+                .attr("height", height + edge.top + edge.bottom)
+                .append("g")
+                .attr("transform",
+                    "translate(" + edge.left + "," + edge.top + ")")
+            
+                
+            // Initialize the X axis
+            var x = d3.scaleBand()
+                .range([0, width])
+                .padding(0.3);
+            var xAxis = svg.append("g")
+                .attr("transform", "translate(0," + height + ")")
+
+            // Initialize the Y axis
+            var y = d3.scaleLinear()
+                .range([height, 0]);
+            var yAxis = svg.append("g")            
+                .attr("class", "myYaxis")
+            
+        svg.append("text")      // text label for the x axis
+        .attr("x", -60 )
+        .attr("y", 240 )  
+        .text("Year");  
+            
+        svg.append("text")      // text label for the y axis
+        .attr("x", 600 )
+        .attr("y", 530 )  
+        .text("Country");   
+
+            // A function that create the plot
+            
+            function update(variable) {
+
+                // Parse the Data
+                d3.csv("final_data1.csv", function(data) {
+
+                    // X axis
+                    x.domain(data.map(function(d) {
+                        return d.Country;
+                    }))
+                    
+                    xAxis.call(d3.axisBottom(x))
+
+                    // Add Y axis
+                    y.domain([0, d3.max(data, function(d) {
+                        return +d[variable]
+                    })]);
+                    yAxis.call(d3.axisLeft(y));
+
+                    // variable u: map data to existing bars
+                    var u = svg.selectAll("rect")
+                        .data(data)
+
+                    // update bars
+                    u
+                        .enter()
+                        .append("rect")
+                        .merge(u)
+                        .transition()
+                        .duration(1500)
+                        .attr("x", function(d) {
+                        
+                            return x(d.Country);
+                        })
+                    
+                        .attr("y", function(d) {
+                            return y(d[variable]);
+                        })
+                        .attr("width", x.bandwidth())
+                        .attr("height", function(d) {
+                            return height - y(d[variable]);
+                        })
+                        .attr("fill", "#69b3a2")
+                    
+                })
+            
+
+            }
+
+            // Initialize plot
+            update('Value')
+
+        </script>
+        
+       
+    </div>
+
+    
+</body>
+
+</html>

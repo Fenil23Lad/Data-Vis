@@ -1,0 +1,45 @@
+country,continent,avgLit,pop,lifeExpectancy
+Afghanistan,Asia,43.828,31889923,15
+Albania,Europe,76.423,3600523,36
+Algeria,Africa,72.301,33333216,96
+Angola,Africa,42.731,12420476,56
+Argentina,Americas,75.32,40301927,54
+Australia,Oceania,81.235,20434176,12
+Austria,Europe,79.829,8199783,55
+Bahrain,Asia,75.635,708573,88
+Bangladesh,Asia,64.062,150448339,74
+Belgium,Europe,79.441,10392226,63
+Benin,Africa,56.728,8078314,25
+Bolivia,Americas,65.554,9119152,26
+Bosnia,Europe,74.852,4552198,39
+Botswana,Africa,50.728,1639131,84
+Brazil,Americas,72.39,190010647,15
+Bulgaria,Europe,73.005,7322858,10
+Burkina Faso,Africa,52.295,14326203,36
+Burundi,Africa,49.58,8390505,58
+Cambodia,Asia,59.723,14131858,97
+Cameroon,Africa,50.43,17696293,45
+Canada,Americas,80.653,33390141,65
+Central African Republic,Africa,44.741,4369038,66
+Chad,Africa,50.651,10238807,87
+Chile,Americas,78.553,16284741,51
+China,Asia,72.961,1318683096,23
+Colombia,Americas,72.889,44227550,66
+Comoros,Africa,65.152,710960,36
+"Congo, Dem. Rep.",Africa,46.462,64606759,33
+"Congo, Rep.",Africa,55.322,3800610,33
+Costa Rica,Americas,78.782,4133884,2
+Cote d'Ivoire,Africa,48.328,18013409,56
+Croatia,Europe,75.748,4493312,55
+Cuba,Americas,78.273,11416987,98
+Czech Republic,Europe,76.486,10228744,96
+Denmark,Europe,78.332,5468120,56
+Djibouti,Africa,54.791,496374,23
+Dominican,Americas,72.235,9319622,58
+Ecuador,Americas,74.994,13755680,85
+Egypt,Africa,71.338,80264543,96
+El Salvador,Americas,71.878,6939688,48
+Equatorial Guinea,Africa,51.579,551201,10
+Eritrea,Africa,58.04,4906585,25
+Ethiopia,Africa,52.947,76511887,23
+Finland,Europe,79.313,5238460,56

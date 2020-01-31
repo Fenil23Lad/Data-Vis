@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+
+    <!-- Load d3.js -->
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <link rel="stylesheet" type="text/css" href="main.css">
+</head>
+
+<body>
+<h1 style="margin-left: 1000px;">World Literacy</h1>
+    <div class="header">
+        <div class="header-right">
+            <a href="index.html">Bar Graph</a>
+            <a href="page1.html">Scatter Plot</a>
+            <a class="active" href="page2.html">Pie Chart</a>
+        </div>
+    </div>
+
+    <div style="padding-left:250px">
+        <div id="my_dataviz"></div>
+
+        <svg width="960" height="1000"></svg>
+        <meta charset="utf-8">
+        <style>
+            .arc text {
+                font-size: 10px;
+                text-anchor: middle;
+            }
+
+            .arc path {
+                stroke: #fff;
+            }
+
+        </style>
+
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <script>
+            var svg = d3.select("svg"),
+                width = +svg.attr("width"),
+                height = +svg.attr("height"),
+                radius = Math.min(width, height) / 2,
+                g = svg.append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+
+            var color = d3.scaleOrdinal(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#1B2631", "#6E2C00", "#616A6B", "#707B7C", "#5D6D7E", "#B2BABB", "#CCD1D1", "#5D6D7E"]);
+
+            var pie = d3.pie()
+                .sort(null)
+                .value(function(d) {
+                    return d.rate;
+                });
+
+            var path = d3.arc()
+                .outerRadius(radius - 10)
+                .innerRadius(0);
+
+            var label = d3.arc()
+                .outerRadius(radius - 40)
+                .innerRadius(radius - 40);
+
+            d3.csv("data.csv", function(d) {
+                d.rate = +d.rate;
+                return d;
+            }, function(error, data) {
+                if (error) throw error;
+
+                    var arc = g.selectAll(".arc")
+                    .data(pie(data))
+                    .enter().append("g")
+                    .attr("class", "arc");
+
+                arc.append("path")
+                    .attr("d", path)
+                    .attr("fill", function(d) {
+                        return color(d.data.country);
+                        
+                    });
+
+                arc.append("text")
+                    .attr("transform", function(d) {
+                        return "translate(" + label.centroid(d) + ")";
+                    })
+                    .attr("dy", "0.35em")
+                    .text(function(d) {
+                        return d.data.country;
+                    })
+                .on('mouseover', function() { d3.select(this).style("fill","red"); });
+
+
+            });
+
+        </script>
+
+
+    </div>
+
+</body>
+
+</html>
